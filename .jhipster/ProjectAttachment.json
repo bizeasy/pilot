@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20240915103637"
+  },
+  "applications": ["pilot"],
+  "fields": [],
+  "jpaMetamodelFiltering": true,
+  "name": "ProjectAttachment",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "project",
+      "relationshipName": "facility",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "attachment",
+      "relationshipName": "attachment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

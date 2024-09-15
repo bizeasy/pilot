@@ -1,0 +1,25 @@
+{
+  "pilotApp": {
+    "projectAttachment": {
+      "home": {
+        "title": "ProjectAttachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Project Attachment बनाएँ",
+        "createOrEditLabel": "Project Attachment बनाएँ या संपादित करें",
+        "notFound": "No Project Attachments found"
+      },
+      "created": "एक नया Project Attachment [identifier: {{ param }}] तैयार है",
+      "updated": "एक Project Attachment [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Project Attachment [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Project Attachment [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Project Attachment"
+      },
+      "id": "ID",
+      "facility": "Facility",
+      "attachment": "Attachment"
+    }
+  }
+}

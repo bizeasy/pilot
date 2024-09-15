@@ -1,0 +1,28 @@
+{
+  "pilotApp": {
+    "sprintTaskHistory": {
+      "home": {
+        "title": "SprintTaskHistories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Sprint Task History बनाएँ",
+        "createOrEditLabel": "Sprint Task History बनाएँ या संपादित करें",
+        "notFound": "No Sprint Task Histories found"
+      },
+      "created": "एक नया Sprint Task History [identifier: {{ param }}] तैयार है",
+      "updated": "एक Sprint Task History [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Sprint Task History [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Sprint Task History [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Sprint Task History"
+      },
+      "id": "ID",
+      "comments": "Comments",
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "fromStatus": "From Status",
+      "toStatus": "To Status"
+    }
+  }
+}

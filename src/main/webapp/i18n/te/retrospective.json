@@ -1,0 +1,27 @@
+{
+  "pilotApp": {
+    "retrospective": {
+      "home": {
+        "title": "Retrospectives",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "కొత్త Retrospective  సృష్టించండి",
+        "createOrEditLabel": "Retrospective సృష్టించండి లేదా సవరించండి",
+        "notFound": "No Retrospectives found"
+      },
+      "created": "{{ param }} ఐడీ తో ఒక కొత్త Retrospective సృష్టించబడినది",
+      "updated": "{{ param }} ఐడీ తో ఒక కొత్త Retrospective సవరించబడినది",
+      "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Retrospective తొలగించబడినది",
+      "delete": {
+        "question": "మీరు Retrospective {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+      },
+      "detail": {
+        "title": "Retrospective"
+      },
+      "id": "ID",
+      "summary": "Summary",
+      "actionItems": "Action Items",
+      "dateCreated": "Date Created",
+      "sprint": "Sprint"
+    }
+  }
+}

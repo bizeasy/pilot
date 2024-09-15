@@ -1,0 +1,113 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sys-sprint-task-history-heading"
+        data-cy="SprintTaskHistoryCreateUpdateHeading"
+        sysTranslate="pilotApp.sprintTaskHistory.home.createOrEditLabel"
+      >
+        Create or edit a Sprint Task History
+      </h2>
+
+      <div>
+        <sys-alert-error></sys-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" sysTranslate="pilotApp.sprintTaskHistory.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_comments" sysTranslate="pilotApp.sprintTaskHistory.comments">Comments</label>
+          <input type="text" class="form-control" name="comments" id="field_comments" data-cy="comments" formControlName="comments" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fromDate" sysTranslate="pilotApp.sprintTaskHistory.fromDate">From Date</label>
+          <div class="input-group">
+            <input
+              id="field_fromDate"
+              data-cy="fromDate"
+              type="text"
+              class="form-control"
+              name="fromDate"
+              ngbDatepicker
+              #fromDateDp="ngbDatepicker"
+              formControlName="fromDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="fromDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_toDate" sysTranslate="pilotApp.sprintTaskHistory.toDate">To Date</label>
+          <div class="input-group">
+            <input
+              id="field_toDate"
+              data-cy="toDate"
+              type="text"
+              class="form-control"
+              name="toDate"
+              ngbDatepicker
+              #toDateDp="ngbDatepicker"
+              formControlName="toDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="toDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fromStatus" sysTranslate="pilotApp.sprintTaskHistory.fromStatus">From Status</label>
+          <select
+            class="form-control"
+            id="field_fromStatus"
+            data-cy="fromStatus"
+            name="fromStatus"
+            formControlName="fromStatus"
+            [compareWith]="compareStatus"
+          >
+            <option [ngValue]="null"></option>
+            @for (statusOption of statusesSharedCollection; track $index) {
+              <option [ngValue]="statusOption">{{ statusOption.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_toStatus" sysTranslate="pilotApp.sprintTaskHistory.toStatus">To Status</label>
+          <select
+            class="form-control"
+            id="field_toStatus"
+            data-cy="toStatus"
+            name="toStatus"
+            formControlName="toStatus"
+            [compareWith]="compareStatus"
+          >
+            <option [ngValue]="null"></option>
+            @for (statusOption of statusesSharedCollection; track $index) {
+              <option [ngValue]="statusOption">{{ statusOption.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sysTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sysTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

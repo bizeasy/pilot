@@ -1,0 +1,25 @@
+{
+  "pilotApp": {
+    "projectAttachment": {
+      "home": {
+        "title": "Project Attachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Project Attachment",
+        "createOrEditLabel": "Create or edit a Project Attachment",
+        "notFound": "No Project Attachments found"
+      },
+      "created": "A new Project Attachment is created with identifier {{ param }}",
+      "updated": "A Project Attachment is updated with identifier {{ param }}",
+      "deleted": "A Project Attachment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Project Attachment {{ id }}?"
+      },
+      "detail": {
+        "title": "Project Attachment"
+      },
+      "id": "ID",
+      "facility": "Facility",
+      "attachment": "Attachment"
+    }
+  }
+}

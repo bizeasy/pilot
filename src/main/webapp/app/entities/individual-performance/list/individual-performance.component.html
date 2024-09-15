@@ -1,0 +1,157 @@
+<div>
+  <h2 id="page-heading" data-cy="IndividualPerformanceHeading">
+    <span sysTranslate="pilotApp.individualPerformance.home.title">Individual Performances</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span sysTranslate="pilotApp.individualPerformance.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-individual-performance"
+        [routerLink]="['/individual-performance/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sysTranslate="pilotApp.individualPerformance.home.createLabel">Create a new Individual Performance</span>
+      </button>
+    </div>
+  </h2>
+
+  <sys-alert-error></sys-alert-error>
+
+  <sys-alert></sys-alert>
+
+  <sys-filter [filters]="filters"></sys-filter>
+
+  @if (individualPerformances?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span sysTranslate="pilotApp.individualPerformance.home.notFound">No Individual Performances found</span>
+    </div>
+  }
+
+  @if (individualPerformances && individualPerformances.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr sysSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" sysSortBy="id">
+              <div class="d-flex">
+                <span sysTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="completedTasks">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.individualPerformance.completedTasks">Completed Tasks</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="velocity">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.individualPerformance.velocity">Velocity</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="storyPointsCompleted">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.individualPerformance.storyPointsCompleted">Story Points Completed</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="party.firstName">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.individualPerformance.party">Party</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="sprint.name">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.individualPerformance.sprint">Sprint</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (individualPerformance of individualPerformances; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/individual-performance', individualPerformance.id, 'view']">{{ individualPerformance.id }}</a>
+              </td>
+              <td>{{ individualPerformance.completedTasks }}</td>
+              <td>{{ individualPerformance.velocity }}</td>
+              <td>{{ individualPerformance.storyPointsCompleted }}</td>
+              <td>
+                @if (individualPerformance.party) {
+                  <div>
+                    <a [routerLink]="['/party', individualPerformance.party.id, 'view']">{{ individualPerformance.party.firstName }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (individualPerformance.sprint) {
+                  <div>
+                    <a [routerLink]="['/sprint', individualPerformance.sprint.id, 'view']">{{ individualPerformance.sprint.name }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/individual-performance', individualPerformance.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/individual-performance', individualPerformance.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(individualPerformance)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (individualPerformances && individualPerformances.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <sys-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sys-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

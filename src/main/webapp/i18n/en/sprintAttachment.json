@@ -1,0 +1,25 @@
+{
+  "pilotApp": {
+    "sprintAttachment": {
+      "home": {
+        "title": "Sprint Attachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sprint Attachment",
+        "createOrEditLabel": "Create or edit a Sprint Attachment",
+        "notFound": "No Sprint Attachments found"
+      },
+      "created": "A new Sprint Attachment is created with identifier {{ param }}",
+      "updated": "A Sprint Attachment is updated with identifier {{ param }}",
+      "deleted": "A Sprint Attachment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sprint Attachment {{ id }}?"
+      },
+      "detail": {
+        "title": "Sprint Attachment"
+      },
+      "id": "ID",
+      "sprint": "Sprint",
+      "attachment": "Attachment"
+    }
+  }
+}

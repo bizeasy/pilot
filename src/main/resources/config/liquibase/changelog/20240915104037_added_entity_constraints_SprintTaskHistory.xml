@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity SprintTaskHistory.
+    -->
+    <changeSet id="20240915104037-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="from_status_id"
+                                 baseTableName="sprint_task_history"
+                                 constraintName="fk_sprint_task_history__from_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="status"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="to_status_id"
+                                 baseTableName="sprint_task_history"
+                                 constraintName="fk_sprint_task_history__to_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="status"
+                                 />
+    </changeSet>
+</databaseChangeLog>

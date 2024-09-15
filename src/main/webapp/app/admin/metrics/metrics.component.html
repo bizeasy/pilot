@@ -1,0 +1,51 @@
+<div>
+  <h2>
+    <span id="metrics-page-heading" data-cy="metricsPageHeading" sysTranslate="metrics.title">Application Metrics</span>
+
+    <button class="btn btn-primary float-end" (click)="refresh()">
+      <fa-icon icon="sync"></fa-icon> <span sysTranslate="metrics.refresh.button">Refresh</span>
+    </button>
+  </h2>
+
+  <h3 sysTranslate="metrics.jvm.title">JVM Metrics</h3>
+
+  @if (metrics() && !updatingMetrics()) {
+    <div class="row">
+      <sys-jvm-memory class="col-md-4" [updating]="updatingMetrics()" [jvmMemoryMetrics]="metrics()?.jvm"></sys-jvm-memory>
+
+      <sys-jvm-threads class="col-md-4" [threads]="threads()"></sys-jvm-threads>
+
+      <sys-metrics-system class="col-md-4" [updating]="updatingMetrics()" [systemMetrics]="metrics()?.processMetrics"></sys-metrics-system>
+    </div>
+  }
+
+  @if (metrics() && metricsKeyExists('garbageCollector')) {
+    <sys-metrics-garbagecollector
+      [updating]="updatingMetrics()"
+      [garbageCollectorMetrics]="metrics()?.garbageCollector"
+    ></sys-metrics-garbagecollector>
+  }
+
+  @if (updatingMetrics()) {
+    <div class="well well-lg" sysTranslate="metrics.updating">Updating...</div>
+  }
+
+  @if (metrics() && metricsKeyExists('http.server.requests')) {
+    <sys-metrics-request [updating]="updatingMetrics()" [requestMetrics]="metrics()?.['http.server.requests']"></sys-metrics-request>
+  }
+
+  @if (metrics() && metricsKeyExists('services')) {
+    <sys-metrics-endpoints-requests
+      [updating]="updatingMetrics()"
+      [endpointsRequestsMetrics]="metrics()?.services"
+    ></sys-metrics-endpoints-requests>
+  }
+
+  @if (metrics() && metricsKeyExists('cache')) {
+    <sys-metrics-cache [updating]="updatingMetrics()" [cacheMetrics]="metrics()?.cache"></sys-metrics-cache>
+  }
+
+  @if (metrics() && metricsKeyExistsAndObjectNotEmpty('databases')) {
+    <sys-metrics-datasource [updating]="updatingMetrics()" [datasourceMetrics]="metrics()?.databases"></sys-metrics-datasource>
+  }
+</div>

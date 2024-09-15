@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (taskHistory(); as taskHistoryRef) {
+      <div>
+        <h2 data-cy="taskHistoryDetailsHeading"><span sysTranslate="pilotApp.taskHistory.detail.title">Task History</span></h2>
+
+        <hr />
+
+        <sys-alert-error></sys-alert-error>
+
+        <sys-alert></sys-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span sysTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ taskHistoryRef.id }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.taskHistory.type">Type</span></dt>
+          <dd>
+            <span>{{ taskHistoryRef.type }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.taskHistory.assignedTo">Assigned To</span></dt>
+          <dd>
+            @if (taskHistory()!.assignedTo) {
+              <div>
+                <a [routerLink]="['/party', taskHistory()!.assignedTo?.id, 'view']">{{ taskHistoryRef.assignedTo?.firstName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.taskHistory.sprint">Sprint</span></dt>
+          <dd>
+            @if (taskHistory()!.sprint) {
+              <div>
+                <a [routerLink]="['/sprint', taskHistory()!.sprint?.id, 'view']">{{ taskHistoryRef.sprint?.name }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.taskHistory.assignedBy">Assigned By</span></dt>
+          <dd>
+            @if (taskHistory()!.assignedBy) {
+              <div>
+                <a [routerLink]="['/party', taskHistory()!.assignedBy?.id, 'view']">{{ taskHistoryRef.assignedBy?.firstName }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sysTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/task-history', taskHistoryRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sysTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

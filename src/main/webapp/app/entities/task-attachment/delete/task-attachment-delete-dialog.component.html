@@ -1,0 +1,28 @@
+@if (taskAttachment) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(taskAttachment.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="taskAttachmentDeleteDialogHeading" sysTranslate="entity.delete.title">Confirm delete operation</h4>
+    </div>
+
+    <div class="modal-body">
+      <sys-alert-error></sys-alert-error>
+      <p
+        id="sys-delete-taskAttachment-heading"
+        sysTranslate="pilotApp.taskAttachment.delete.question"
+        [translateValues]="{ id: taskAttachment.id }"
+      >
+        Are you sure you want to delete Task Attachment {{ taskAttachment.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span sysTranslate="entity.action.cancel">Cancel</span>
+      </button>
+
+      <button id="sys-confirm-delete-taskAttachment" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span sysTranslate="entity.action.delete">Delete</span>
+      </button>
+    </div>
+  </form>
+}

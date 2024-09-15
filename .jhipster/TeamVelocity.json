@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20240915104837"
+  },
+  "applications": ["pilot"],
+  "fields": [
+    {
+      "fieldName": "sprintVelocity",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "averageVelocity",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "TeamVelocity",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "sprint",
+      "relationshipName": "sprint",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

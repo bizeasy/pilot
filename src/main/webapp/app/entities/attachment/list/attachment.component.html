@@ -1,0 +1,136 @@
+<div>
+  <h2 id="page-heading" data-cy="AttachmentHeading">
+    <span sysTranslate="pilotApp.attachment.home.title">Attachments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span sysTranslate="pilotApp.attachment.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-attachment"
+        [routerLink]="['/attachment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sysTranslate="pilotApp.attachment.home.createLabel">Create a new Attachment</span>
+      </button>
+    </div>
+  </h2>
+
+  <sys-alert-error></sys-alert-error>
+
+  <sys-alert></sys-alert>
+
+  @if (attachments?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span sysTranslate="pilotApp.attachment.home.notFound">No Attachments found</span>
+    </div>
+  }
+
+  @if (attachments && attachments.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr sysSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" sysSortBy="id">
+              <div class="d-flex">
+                <span sysTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="name">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.attachment.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="fileAttachment">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.attachment.fileAttachment">File Attachment</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="attachmentUrl">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.attachment.attachmentUrl">Attachment Url</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="mimeType">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.attachment.mimeType">Mime Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (attachment of attachments; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/attachment', attachment.id, 'view']">{{ attachment.id }}</a>
+              </td>
+              <td>{{ attachment.name }}</td>
+              <td>
+                @if (attachment.fileAttachment) {
+                  <a (click)="openFile(attachment.fileAttachment, attachment.fileAttachmentContentType)" sysTranslate="entity.action.open"
+                    >Open</a
+                  >
+                  <span>{{ attachment.fileAttachmentContentType }}, {{ byteSize(attachment.fileAttachment) }}</span>
+                }
+              </td>
+              <td>{{ attachment.attachmentUrl }}</td>
+              <td>{{ attachment.mimeType }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/attachment', attachment.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/attachment', attachment.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(attachment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (attachments && attachments.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <sys-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sys-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

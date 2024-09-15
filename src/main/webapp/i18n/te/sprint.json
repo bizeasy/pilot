@@ -1,0 +1,30 @@
+{
+  "pilotApp": {
+    "sprint": {
+      "home": {
+        "title": "Sprints",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "కొత్త Sprint  సృష్టించండి",
+        "createOrEditLabel": "Sprint సృష్టించండి లేదా సవరించండి",
+        "notFound": "No Sprints found"
+      },
+      "created": "{{ param }} ఐడీ తో ఒక కొత్త Sprint సృష్టించబడినది",
+      "updated": "{{ param }} ఐడీ తో ఒక కొత్త Sprint సవరించబడినది",
+      "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Sprint తొలగించబడినది",
+      "delete": {
+        "question": "మీరు Sprint {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+      },
+      "detail": {
+        "title": "Sprint"
+      },
+      "id": "ID",
+      "name": "Name",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "goal": "Goal",
+      "totalPoints": "Total Points",
+      "project": "Project",
+      "status": "Status"
+    }
+  }
+}

@@ -1,0 +1,131 @@
+<div>
+  <h2 id="page-heading" data-cy="ProjectHeading">
+    <span sysTranslate="pilotApp.project.home.title">Projects</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span sysTranslate="pilotApp.project.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-project"
+        [routerLink]="['/project/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sysTranslate="pilotApp.project.home.createLabel">Create a new Project</span>
+      </button>
+    </div>
+  </h2>
+
+  <sys-alert-error></sys-alert-error>
+
+  <sys-alert></sys-alert>
+
+  <sys-filter [filters]="filters"></sys-filter>
+
+  @if (projects?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span sysTranslate="pilotApp.project.home.notFound">No Projects found</span>
+    </div>
+  }
+
+  @if (projects && projects.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr sysSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" sysSortBy="id">
+              <div class="d-flex">
+                <span sysTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="name">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.project.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="description">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.project.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="startDate">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.project.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="endDate">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.project.endDate">End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (project of projects; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/project', project.id, 'view']">{{ project.id }}</a>
+              </td>
+              <td>{{ project.name }}</td>
+              <td>{{ project.description }}</td>
+              <td>{{ project.startDate | formatMediumDate }}</td>
+              <td>{{ project.endDate | formatMediumDate }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/project', project.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/project', project.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(project)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (projects && projects.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <sys-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sys-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

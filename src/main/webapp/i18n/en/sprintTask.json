@@ -1,0 +1,36 @@
+{
+  "pilotApp": {
+    "sprintTask": {
+      "home": {
+        "title": "Sprint Tasks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sprint Task",
+        "createOrEditLabel": "Create or edit a Sprint Task",
+        "notFound": "No Sprint Tasks found"
+      },
+      "created": "A new Sprint Task is created with identifier {{ param }}",
+      "updated": "A Sprint Task is updated with identifier {{ param }}",
+      "deleted": "A Sprint Task is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sprint Task {{ id }}?"
+      },
+      "detail": {
+        "title": "Sprint Task"
+      },
+      "id": "ID",
+      "sequenceNo": "Sequence No",
+      "storyPoints": "Story Points",
+      "fromTime": "From Time",
+      "thruTime": "Thru Time",
+      "assignedTime": "Assigned Time",
+      "duration": "Duration",
+      "task": "Task",
+      "sprint": "Sprint",
+      "assignedTo": "Assigned To",
+      "assignedBy": "Assigned By",
+      "qa": "Qa",
+      "reviewedBy": "Reviewed By",
+      "status": "Status"
+    }
+  }
+}

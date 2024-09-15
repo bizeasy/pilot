@@ -1,0 +1,28 @@
+@if (teamVelocity) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(teamVelocity.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="teamVelocityDeleteDialogHeading" sysTranslate="entity.delete.title">Confirm delete operation</h4>
+    </div>
+
+    <div class="modal-body">
+      <sys-alert-error></sys-alert-error>
+      <p
+        id="sys-delete-teamVelocity-heading"
+        sysTranslate="pilotApp.teamVelocity.delete.question"
+        [translateValues]="{ id: teamVelocity.id }"
+      >
+        Are you sure you want to delete Team Velocity {{ teamVelocity.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span sysTranslate="entity.action.cancel">Cancel</span>
+      </button>
+
+      <button id="sys-confirm-delete-teamVelocity" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span sysTranslate="entity.action.delete">Delete</span>
+      </button>
+    </div>
+  </form>
+}

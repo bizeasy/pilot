@@ -1,0 +1,36 @@
+{
+  "pilotApp": {
+    "sprintTask": {
+      "home": {
+        "title": "SprintTasks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Sprint Task बनाएँ",
+        "createOrEditLabel": "Sprint Task बनाएँ या संपादित करें",
+        "notFound": "No Sprint Tasks found"
+      },
+      "created": "एक नया Sprint Task [identifier: {{ param }}] तैयार है",
+      "updated": "एक Sprint Task [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Sprint Task [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Sprint Task [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Sprint Task"
+      },
+      "id": "ID",
+      "sequenceNo": "Sequence No",
+      "storyPoints": "Story Points",
+      "fromTime": "From Time",
+      "thruTime": "Thru Time",
+      "assignedTime": "Assigned Time",
+      "duration": "Duration",
+      "task": "Task",
+      "sprint": "Sprint",
+      "assignedTo": "Assigned To",
+      "assignedBy": "Assigned By",
+      "qa": "Qa",
+      "reviewedBy": "Reviewed By",
+      "status": "Status"
+    }
+  }
+}

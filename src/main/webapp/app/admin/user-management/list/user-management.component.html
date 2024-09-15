@@ -1,0 +1,132 @@
+<div>
+  <h2>
+    <span id="user-management-page-heading" data-cy="userManagementPageHeading" sysTranslate="userManagement.home.title">Users</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading()">
+        <fa-icon icon="sync" [animation]="isLoading() ? 'spin' : undefined"></fa-icon>
+        <span sysTranslate="userManagement.home.refreshListLabel">Refresh list</span>
+      </button>
+      <button class="btn btn-primary jh-create-entity" [routerLink]="['./new']">
+        <fa-icon icon="plus"></fa-icon> <span sysTranslate="userManagement.home.createLabel">Create a new user</span>
+      </button>
+    </div>
+  </h2>
+
+  <sys-alert-error></sys-alert-error>
+
+  <sys-alert></sys-alert>
+
+  @if (users()) {
+    <div class="table-responsive">
+      <table class="table table-striped" aria-describedby="user-management-page-heading">
+        <thead>
+          <tr sysSort [sortState]="sortState" (sortChange)="transition($event)">
+            <th scope="col" sysSortBy="id"><span sysTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col" sysSortBy="login"><span sysTranslate="userManagement.login">Login</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col" sysSortBy="email"><span sysTranslate="userManagement.email">Email</span> <fa-icon icon="sort"></fa-icon></th>
+            <th scope="col"></th>
+            <th scope="col" sysSortBy="langKey">
+              <span sysTranslate="userManagement.langKey">Language</span> <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col"><span sysTranslate="userManagement.profiles">Profiles</span></th>
+            <th scope="col" sysSortBy="createdDate">
+              <span sysTranslate="userManagement.createdDate">Created date</span> <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col" sysSortBy="lastModifiedBy">
+              <span sysTranslate="userManagement.lastModifiedBy">Modified by</span> <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col" sysSortBy="lastModifiedDate">
+              <span sysTranslate="userManagement.lastModifiedDate">Modified date</span> <fa-icon icon="sort"></fa-icon>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of users(); track trackIdentity) {
+            <tr>
+              <td>
+                <a [routerLink]="['./', user.login, 'view']">{{ user.id }}</a>
+              </td>
+              <td>{{ user.login }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                @if (!user.activated) {
+                  <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" sysTranslate="userManagement.deactivated">
+                    Deactivated
+                  </button>
+                } @else {
+                  <button
+                    class="btn btn-success btn-sm"
+                    (click)="setActive(user, false)"
+                    [disabled]="!currentAccount() || currentAccount()?.login === user.login"
+                    sysTranslate="userManagement.activated"
+                  >
+                    Activated
+                  </button>
+                }
+              </td>
+              <td>{{ user.langKey }}</td>
+              <td>
+                @for (authority of user.authorities; track $index) {
+                  <div>
+                    <span class="badge bg-info">{{ authority }}</span>
+                  </div>
+                }
+              </td>
+              <td>{{ user.createdDate | date: 'dd/MM/yy HH:mm' }}</td>
+              <td>{{ user.lastModifiedBy }}</td>
+              <td>{{ user.lastModifiedDate | date: 'dd/MM/yy HH:mm' }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <button type="submit" [routerLink]="['./', user.login, 'view']" class="btn btn-info btn-sm">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.view">View</span>
+                  </button>
+
+                  <button
+                    type="submit"
+                    [routerLink]="['./', user.login, 'edit']"
+                    queryParamsHandling="merge"
+                    class="btn btn-primary btn-sm"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.edit">Edit</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    (click)="deleteUser(user)"
+                    class="btn btn-danger btn-sm"
+                    [disabled]="!currentAccount() || currentAccount()?.login === user.login"
+                  >
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <div class="d-flex justify-content-center">
+        <sys-item-count [params]="{ page: page, totalItems: totalItems(), itemsPerPage: itemsPerPage }"></sys-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [(page)]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="transition()"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

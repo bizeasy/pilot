@@ -1,0 +1,25 @@
+{
+  "pilotApp": {
+    "sprintAttachment": {
+      "home": {
+        "title": "Sprint Attachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "కొత్త Sprint Attachment  సృష్టించండి",
+        "createOrEditLabel": "Sprint Attachment సృష్టించండి లేదా సవరించండి",
+        "notFound": "No Sprint Attachments found"
+      },
+      "created": "{{ param }} ఐడీ తో ఒక కొత్త Sprint Attachment సృష్టించబడినది",
+      "updated": "{{ param }} ఐడీ తో ఒక కొత్త Sprint Attachment సవరించబడినది",
+      "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Sprint Attachment తొలగించబడినది",
+      "delete": {
+        "question": "మీరు Sprint Attachment {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+      },
+      "detail": {
+        "title": "Sprint Attachment"
+      },
+      "id": "ID",
+      "sprint": "Sprint",
+      "attachment": "Attachment"
+    }
+  }
+}

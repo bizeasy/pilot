@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (taskLog(); as taskLogRef) {
+      <div>
+        <h2 data-cy="taskLogDetailsHeading"><span sysTranslate="pilotApp.taskLog.detail.title">Task Log</span></h2>
+
+        <hr />
+
+        <sys-alert-error></sys-alert-error>
+
+        <sys-alert></sys-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span sysTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ taskLogRef.id }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.taskLog.comments">Comments</span></dt>
+          <dd>
+            <span>{{ taskLogRef.comments }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.taskLog.fromTime">From Time</span></dt>
+          <dd>
+            <span>{{ taskLogRef.fromTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.taskLog.toTime">To Time</span></dt>
+          <dd>
+            <span>{{ taskLogRef.toTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.taskLog.task">Task</span></dt>
+          <dd>
+            @if (taskLog()!.task) {
+              <div>
+                <a [routerLink]="['/task', taskLog()!.task?.id, 'view']">{{ taskLogRef.task?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sysTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/task-log', taskLogRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sysTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

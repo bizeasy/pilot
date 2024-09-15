@@ -1,0 +1,26 @@
+{
+  "pilotApp": {
+    "teamVelocity": {
+      "home": {
+        "title": "Team Velocities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "కొత్త Team Velocity  సృష్టించండి",
+        "createOrEditLabel": "Team Velocity సృష్టించండి లేదా సవరించండి",
+        "notFound": "No Team Velocities found"
+      },
+      "created": "{{ param }} ఐడీ తో ఒక కొత్త Team Velocity సృష్టించబడినది",
+      "updated": "{{ param }} ఐడీ తో ఒక కొత్త Team Velocity సవరించబడినది",
+      "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Team Velocity తొలగించబడినది",
+      "delete": {
+        "question": "మీరు Team Velocity {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+      },
+      "detail": {
+        "title": "Team Velocity"
+      },
+      "id": "ID",
+      "sprintVelocity": "Sprint Velocity",
+      "averageVelocity": "Average Velocity",
+      "sprint": "Sprint"
+    }
+  }
+}

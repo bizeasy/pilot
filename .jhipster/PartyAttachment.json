@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20240915103337"
+  },
+  "applications": ["pilot"],
+  "fields": [],
+  "jpaMetamodelFiltering": true,
+  "name": "PartyAttachment",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "firstName",
+      "otherEntityName": "party",
+      "relationshipName": "party",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "attachment",
+      "relationshipName": "attachment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

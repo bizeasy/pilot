@@ -1,0 +1,27 @@
+{
+  "pilotApp": {
+    "taskHistory": {
+      "home": {
+        "title": "Task Histories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "కొత్త Task History  సృష్టించండి",
+        "createOrEditLabel": "Task History సృష్టించండి లేదా సవరించండి",
+        "notFound": "No Task Histories found"
+      },
+      "created": "{{ param }} ఐడీ తో ఒక కొత్త Task History సృష్టించబడినది",
+      "updated": "{{ param }} ఐడీ తో ఒక కొత్త Task History సవరించబడినది",
+      "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Task History తొలగించబడినది",
+      "delete": {
+        "question": "మీరు Task History {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+      },
+      "detail": {
+        "title": "Task History"
+      },
+      "id": "ID",
+      "type": "Type",
+      "assignedTo": "Assigned To",
+      "sprint": "Sprint",
+      "assignedBy": "Assigned By"
+    }
+  }
+}

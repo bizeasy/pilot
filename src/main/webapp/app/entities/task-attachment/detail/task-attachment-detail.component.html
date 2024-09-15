@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (taskAttachment(); as taskAttachmentRef) {
+      <div>
+        <h2 data-cy="taskAttachmentDetailsHeading"><span sysTranslate="pilotApp.taskAttachment.detail.title">Task Attachment</span></h2>
+
+        <hr />
+
+        <sys-alert-error></sys-alert-error>
+
+        <sys-alert></sys-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span sysTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ taskAttachmentRef.id }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.taskAttachment.task">Task</span></dt>
+          <dd>
+            @if (taskAttachment()!.task) {
+              <div>
+                <a [routerLink]="['/task', taskAttachment()!.task?.id, 'view']">{{ taskAttachmentRef.task?.title }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.taskAttachment.attachment">Attachment</span></dt>
+          <dd>
+            @if (taskAttachment()!.attachment) {
+              <div>
+                <a [routerLink]="['/attachment', taskAttachment()!.attachment?.id, 'view']">{{ taskAttachmentRef.attachment?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sysTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/task-attachment', taskAttachmentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sysTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

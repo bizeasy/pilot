@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (partyAttachment(); as partyAttachmentRef) {
+      <div>
+        <h2 data-cy="partyAttachmentDetailsHeading"><span sysTranslate="pilotApp.partyAttachment.detail.title">Party Attachment</span></h2>
+
+        <hr />
+
+        <sys-alert-error></sys-alert-error>
+
+        <sys-alert></sys-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span sysTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ partyAttachmentRef.id }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.partyAttachment.party">Party</span></dt>
+          <dd>
+            @if (partyAttachment()!.party) {
+              <div>
+                <a [routerLink]="['/party', partyAttachment()!.party?.id, 'view']">{{ partyAttachmentRef.party?.firstName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.partyAttachment.attachment">Attachment</span></dt>
+          <dd>
+            @if (partyAttachment()!.attachment) {
+              <div>
+                <a [routerLink]="['/attachment', partyAttachment()!.attachment?.id, 'view']">{{ partyAttachmentRef.attachment?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sysTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/party-attachment', partyAttachmentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sysTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

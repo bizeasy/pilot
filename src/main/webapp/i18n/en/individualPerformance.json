@@ -1,0 +1,28 @@
+{
+  "pilotApp": {
+    "individualPerformance": {
+      "home": {
+        "title": "Individual Performances",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Individual Performance",
+        "createOrEditLabel": "Create or edit a Individual Performance",
+        "notFound": "No Individual Performances found"
+      },
+      "created": "A new Individual Performance is created with identifier {{ param }}",
+      "updated": "A Individual Performance is updated with identifier {{ param }}",
+      "deleted": "A Individual Performance is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Individual Performance {{ id }}?"
+      },
+      "detail": {
+        "title": "Individual Performance"
+      },
+      "id": "ID",
+      "completedTasks": "Completed Tasks",
+      "velocity": "Velocity",
+      "storyPointsCompleted": "Story Points Completed",
+      "party": "Party",
+      "sprint": "Sprint"
+    }
+  }
+}

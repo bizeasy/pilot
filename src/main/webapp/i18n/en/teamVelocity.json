@@ -1,0 +1,26 @@
+{
+  "pilotApp": {
+    "teamVelocity": {
+      "home": {
+        "title": "Team Velocities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Team Velocity",
+        "createOrEditLabel": "Create or edit a Team Velocity",
+        "notFound": "No Team Velocities found"
+      },
+      "created": "A new Team Velocity is created with identifier {{ param }}",
+      "updated": "A Team Velocity is updated with identifier {{ param }}",
+      "deleted": "A Team Velocity is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Team Velocity {{ id }}?"
+      },
+      "detail": {
+        "title": "Team Velocity"
+      },
+      "id": "ID",
+      "sprintVelocity": "Sprint Velocity",
+      "averageVelocity": "Average Velocity",
+      "sprint": "Sprint"
+    }
+  }
+}

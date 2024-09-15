@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (sprintTaskHistory(); as sprintTaskHistoryRef) {
+      <div>
+        <h2 data-cy="sprintTaskHistoryDetailsHeading">
+          <span sysTranslate="pilotApp.sprintTaskHistory.detail.title">Sprint Task History</span>
+        </h2>
+
+        <hr />
+
+        <sys-alert-error></sys-alert-error>
+
+        <sys-alert></sys-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span sysTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ sprintTaskHistoryRef.id }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTaskHistory.comments">Comments</span></dt>
+          <dd>
+            <span>{{ sprintTaskHistoryRef.comments }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTaskHistory.fromDate">From Date</span></dt>
+          <dd>
+            <span>{{ sprintTaskHistoryRef.fromDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTaskHistory.toDate">To Date</span></dt>
+          <dd>
+            <span>{{ sprintTaskHistoryRef.toDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTaskHistory.fromStatus">From Status</span></dt>
+          <dd>
+            @if (sprintTaskHistory()!.fromStatus) {
+              <div>
+                <a [routerLink]="['/status', sprintTaskHistory()!.fromStatus?.id, 'view']">{{ sprintTaskHistoryRef.fromStatus?.name }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTaskHistory.toStatus">To Status</span></dt>
+          <dd>
+            @if (sprintTaskHistory()!.toStatus) {
+              <div>
+                <a [routerLink]="['/status', sprintTaskHistory()!.toStatus?.id, 'view']">{{ sprintTaskHistoryRef.toStatus?.name }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sysTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/sprint-task-history', sprintTaskHistoryRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sysTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

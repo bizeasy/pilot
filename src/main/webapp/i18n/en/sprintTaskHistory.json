@@ -1,0 +1,28 @@
+{
+  "pilotApp": {
+    "sprintTaskHistory": {
+      "home": {
+        "title": "Sprint Task Histories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sprint Task History",
+        "createOrEditLabel": "Create or edit a Sprint Task History",
+        "notFound": "No Sprint Task Histories found"
+      },
+      "created": "A new Sprint Task History is created with identifier {{ param }}",
+      "updated": "A Sprint Task History is updated with identifier {{ param }}",
+      "deleted": "A Sprint Task History is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sprint Task History {{ id }}?"
+      },
+      "detail": {
+        "title": "Sprint Task History"
+      },
+      "id": "ID",
+      "comments": "Comments",
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "fromStatus": "From Status",
+      "toStatus": "To Status"
+    }
+  }
+}

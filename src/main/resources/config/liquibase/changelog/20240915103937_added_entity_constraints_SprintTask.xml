@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity SprintTask.
+    -->
+    <changeSet id="20240915103937-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="task_id"
+                                 baseTableName="sprint_task"
+                                 constraintName="fk_sprint_task__task_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="task"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="sprint_id"
+                                 baseTableName="sprint_task"
+                                 constraintName="fk_sprint_task__sprint_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="sprint"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="assigned_to_id"
+                                 baseTableName="sprint_task"
+                                 constraintName="fk_sprint_task__assigned_to_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="party"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="assigned_by_id"
+                                 baseTableName="sprint_task"
+                                 constraintName="fk_sprint_task__assigned_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="party"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="qa_id"
+                                 baseTableName="sprint_task"
+                                 constraintName="fk_sprint_task__qa_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="party"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="reviewed_by_id"
+                                 baseTableName="sprint_task"
+                                 constraintName="fk_sprint_task__reviewed_by_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="party"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="sprint_task"
+                                 constraintName="fk_sprint_task__status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="status"
+                                 />
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,165 @@
+<div>
+  <h2 id="page-heading" data-cy="SprintHeading">
+    <span sysTranslate="pilotApp.sprint.home.title">Sprints</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span sysTranslate="pilotApp.sprint.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sprint"
+        [routerLink]="['/sprint/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sysTranslate="pilotApp.sprint.home.createLabel">Create a new Sprint</span>
+      </button>
+    </div>
+  </h2>
+
+  <sys-alert-error></sys-alert-error>
+
+  <sys-alert></sys-alert>
+
+  <sys-filter [filters]="filters"></sys-filter>
+
+  @if (sprints?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span sysTranslate="pilotApp.sprint.home.notFound">No Sprints found</span>
+    </div>
+  }
+
+  @if (sprints && sprints.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr sysSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" sysSortBy="id">
+              <div class="d-flex">
+                <span sysTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="name">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.sprint.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="startDate">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.sprint.startDate">Start Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="endDate">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.sprint.endDate">End Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="goal">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.sprint.goal">Goal</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="totalPoints">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.sprint.totalPoints">Total Points</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="project.name">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.sprint.project">Project</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="status.name">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.sprint.status">Status</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (sprint of sprints; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/sprint', sprint.id, 'view']">{{ sprint.id }}</a>
+              </td>
+              <td>{{ sprint.name }}</td>
+              <td>{{ sprint.startDate | formatMediumDate }}</td>
+              <td>{{ sprint.endDate | formatMediumDate }}</td>
+              <td>{{ sprint.goal }}</td>
+              <td>{{ sprint.totalPoints }}</td>
+              <td>
+                @if (sprint.project) {
+                  <div>
+                    <a [routerLink]="['/project', sprint.project.id, 'view']">{{ sprint.project.name }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (sprint.status) {
+                  <div>
+                    <a [routerLink]="['/status', sprint.status.id, 'view']">{{ sprint.status.name }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/sprint', sprint.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/sprint', sprint.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(sprint)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (sprints && sprints.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <sys-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sys-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

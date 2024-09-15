@@ -1,0 +1,25 @@
+{
+  "pilotApp": {
+    "comment": {
+      "home": {
+        "title": "Comments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Comment बनाएँ",
+        "createOrEditLabel": "Comment बनाएँ या संपादित करें",
+        "notFound": "No Comments found"
+      },
+      "created": "एक नया Comment [identifier: {{ param }}] तैयार है",
+      "updated": "एक Comment [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Comment [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Comment [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Comment"
+      },
+      "id": "ID",
+      "text": "Text",
+      "task": "Task"
+    }
+  }
+}

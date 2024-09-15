@@ -1,0 +1,25 @@
+{
+  "pilotApp": {
+    "partyAttachment": {
+      "home": {
+        "title": "PartyAttachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Party Attachment बनाएँ",
+        "createOrEditLabel": "Party Attachment बनाएँ या संपादित करें",
+        "notFound": "No Party Attachments found"
+      },
+      "created": "एक नया Party Attachment [identifier: {{ param }}] तैयार है",
+      "updated": "एक Party Attachment [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Party Attachment [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Party Attachment [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Party Attachment"
+      },
+      "id": "ID",
+      "party": "Party",
+      "attachment": "Attachment"
+    }
+  }
+}

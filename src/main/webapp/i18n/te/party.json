@@ -1,0 +1,35 @@
+{
+  "pilotApp": {
+    "party": {
+      "home": {
+        "title": "Parties",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "కొత్త Party  సృష్టించండి",
+        "createOrEditLabel": "Party సృష్టించండి లేదా సవరించండి",
+        "notFound": "No Parties found"
+      },
+      "created": "{{ param }} ఐడీ తో ఒక కొత్త Party సృష్టించబడినది",
+      "updated": "{{ param }} ఐడీ తో ఒక కొత్త Party సవరించబడినది",
+      "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Party తొలగించబడినది",
+      "delete": {
+        "question": "మీరు Party {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+      },
+      "detail": {
+        "title": "Party"
+      },
+      "id": "ID",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "displayName": "Display Name",
+      "email": "Email",
+      "dob": "Dob",
+      "notes": "Notes",
+      "mobileNumber": "Mobile Number",
+      "employeeId": "Employee Id",
+      "login": "Login",
+      "user": "User",
+      "status": "Status",
+      "partyType": "Party Type"
+    }
+  }
+}

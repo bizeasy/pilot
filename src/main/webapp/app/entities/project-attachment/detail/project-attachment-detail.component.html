@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (projectAttachment(); as projectAttachmentRef) {
+      <div>
+        <h2 data-cy="projectAttachmentDetailsHeading">
+          <span sysTranslate="pilotApp.projectAttachment.detail.title">Project Attachment</span>
+        </h2>
+
+        <hr />
+
+        <sys-alert-error></sys-alert-error>
+
+        <sys-alert></sys-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span sysTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ projectAttachmentRef.id }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.projectAttachment.facility">Facility</span></dt>
+          <dd>
+            @if (projectAttachment()!.facility) {
+              <div>
+                <a [routerLink]="['/project', projectAttachment()!.facility?.id, 'view']">{{ projectAttachmentRef.facility?.name }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.projectAttachment.attachment">Attachment</span></dt>
+          <dd>
+            @if (projectAttachment()!.attachment) {
+              <div>
+                <a [routerLink]="['/attachment', projectAttachment()!.attachment?.id, 'view']">{{ projectAttachmentRef.attachment?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sysTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/project-attachment', projectAttachmentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sysTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

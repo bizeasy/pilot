@@ -1,0 +1,231 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="sys-party-heading" data-cy="PartyCreateUpdateHeading" sysTranslate="pilotApp.party.home.createOrEditLabel">
+        Create or edit a Party
+      </h2>
+
+      <div>
+        <sys-alert-error></sys-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" sysTranslate="pilotApp.party.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let firstNameRef = editForm.get('firstName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_firstName" sysTranslate="pilotApp.party.firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+          @if (firstNameRef.invalid && (firstNameRef.dirty || firstNameRef.touched)) {
+            <div>
+              @if (editForm.get('firstName')?.errors?.maxlength) {
+                <small class="form-text text-danger" sysTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let lastNameRef = editForm.get('lastName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_lastName" sysTranslate="pilotApp.party.lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+          @if (lastNameRef.invalid && (lastNameRef.dirty || lastNameRef.touched)) {
+            <div>
+              @if (editForm.get('lastName')?.errors?.maxlength) {
+                <small class="form-text text-danger" sysTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let displayNameRef = editForm.get('displayName')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_displayName" sysTranslate="pilotApp.party.displayName">Display Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="displayName"
+            id="field_displayName"
+            data-cy="displayName"
+            formControlName="displayName"
+          />
+          @if (displayNameRef.invalid && (displayNameRef.dirty || displayNameRef.touched)) {
+            <div>
+              @if (editForm.get('displayName')?.errors?.maxlength) {
+                <small class="form-text text-danger" sysTranslate="entity.validation.maxlength" [translateValues]="{ max: '100' }"
+                  >This field cannot be longer than 100 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let emailRef = editForm.get('email')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_email" sysTranslate="pilotApp.party.email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          @if (emailRef.invalid && (emailRef.dirty || emailRef.touched)) {
+            <div>
+              @if (editForm.get('email')?.errors?.minlength) {
+                <small class="form-text text-danger" sysTranslate="entity.validation.minlength" [translateValues]="{ min: '5' }"
+                  >This field is required to be at least 5 characters.</small
+                >
+              }
+              @if (editForm.get('email')?.errors?.maxlength) {
+                <small class="form-text text-danger" sysTranslate="entity.validation.maxlength" [translateValues]="{ max: '75' }"
+                  >This field cannot be longer than 75 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dob" sysTranslate="pilotApp.party.dob">Dob</label>
+          <div class="input-group">
+            <input
+              id="field_dob"
+              data-cy="dob"
+              type="text"
+              class="form-control"
+              name="dob"
+              ngbDatepicker
+              #dobDp="ngbDatepicker"
+              formControlName="dob"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dobDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        @let notesRef = editForm.get('notes')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_notes" sysTranslate="pilotApp.party.notes">Notes</label>
+          <input type="text" class="form-control" name="notes" id="field_notes" data-cy="notes" formControlName="notes" />
+          @if (notesRef.invalid && (notesRef.dirty || notesRef.touched)) {
+            <div>
+              @if (editForm.get('notes')?.errors?.maxlength) {
+                <small class="form-text text-danger" sysTranslate="entity.validation.maxlength" [translateValues]="{ max: '255' }"
+                  >This field cannot be longer than 255 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        @let mobileNumberRef = editForm.get('mobileNumber')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_mobileNumber" sysTranslate="pilotApp.party.mobileNumber">Mobile Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="mobileNumber"
+            id="field_mobileNumber"
+            data-cy="mobileNumber"
+            formControlName="mobileNumber"
+          />
+          @if (mobileNumberRef.invalid && (mobileNumberRef.dirty || mobileNumberRef.touched)) {
+            <div>
+              @if (editForm.get('mobileNumber')?.errors?.required) {
+                <small class="form-text text-danger" sysTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('mobileNumber')?.errors?.minlength) {
+                <small class="form-text text-danger" sysTranslate="entity.validation.minlength" [translateValues]="{ min: '10' }"
+                  >This field is required to be at least 10 characters.</small
+                >
+              }
+              @if (editForm.get('mobileNumber')?.errors?.maxlength) {
+                <small class="form-text text-danger" sysTranslate="entity.validation.maxlength" [translateValues]="{ max: '14' }"
+                  >This field cannot be longer than 14 characters.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_employeeId" sysTranslate="pilotApp.party.employeeId">Employee Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="employeeId"
+            id="field_employeeId"
+            data-cy="employeeId"
+            formControlName="employeeId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_login" sysTranslate="pilotApp.party.login">Login</label>
+          <input type="text" class="form-control" name="login" id="field_login" data-cy="login" formControlName="login" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_user" sysTranslate="pilotApp.party.user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            <option [ngValue]="null"></option>
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.login }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" sysTranslate="pilotApp.party.status">Status</label>
+          <select
+            class="form-control"
+            id="field_status"
+            data-cy="status"
+            name="status"
+            formControlName="status"
+            [compareWith]="compareStatus"
+          >
+            <option [ngValue]="null"></option>
+            @for (statusOption of statusesSharedCollection; track $index) {
+              <option [ngValue]="statusOption">{{ statusOption.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_partyType" sysTranslate="pilotApp.party.partyType">Party Type</label>
+          <select
+            class="form-control"
+            id="field_partyType"
+            data-cy="partyType"
+            name="partyType"
+            formControlName="partyType"
+            [compareWith]="comparePartyType"
+          >
+            <option [ngValue]="null"></option>
+            @for (partyTypeOption of partyTypesSharedCollection; track $index) {
+              <option [ngValue]="partyTypeOption">{{ partyTypeOption.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sysTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sysTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

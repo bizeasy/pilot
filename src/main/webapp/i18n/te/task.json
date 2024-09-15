@@ -1,0 +1,38 @@
+{
+  "pilotApp": {
+    "task": {
+      "home": {
+        "title": "Tasks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "కొత్త Task  సృష్టించండి",
+        "createOrEditLabel": "Task సృష్టించండి లేదా సవరించండి",
+        "notFound": "No Tasks found"
+      },
+      "created": "{{ param }} ఐడీ తో ఒక కొత్త Task సృష్టించబడినది",
+      "updated": "{{ param }} ఐడీ తో ఒక కొత్త Task సవరించబడినది",
+      "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Task తొలగించబడినది",
+      "delete": {
+        "question": "మీరు Task {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+      },
+      "detail": {
+        "title": "Task"
+      },
+      "id": "ID",
+      "title": "Title",
+      "description": "Description",
+      "priority": "Priority",
+      "dueDate": "Due Date",
+      "info": "Info",
+      "storyPoints": "Story Points",
+      "startTime": "Start Time",
+      "pauseTime": "Pause Time",
+      "endTime": "End Time",
+      "totalDuration": "Total Duration",
+      "sequenceNo": "Sequence No",
+      "comments": "Comments",
+      "project": "Project",
+      "status": "Status",
+      "assignee": "Assignee"
+    }
+  }
+}

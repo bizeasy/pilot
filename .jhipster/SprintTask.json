@@ -1,0 +1,88 @@
+{
+  "annotations": {
+    "changelogDate": "20240915103937"
+  },
+  "applications": ["pilot"],
+  "fields": [
+    {
+      "fieldName": "sequenceNo",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "storyPoints",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "fromTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "thruTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "assignedTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "Duration"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "SprintTask",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "task",
+      "relationshipName": "task",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "sprint",
+      "relationshipName": "sprint",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "firstName",
+      "otherEntityName": "party",
+      "relationshipName": "assignedTo",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "firstName",
+      "otherEntityName": "party",
+      "relationshipName": "assignedBy",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "firstName",
+      "otherEntityName": "party",
+      "relationshipName": "qa",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "firstName",
+      "otherEntityName": "party",
+      "relationshipName": "reviewedBy",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "status",
+      "relationshipName": "status",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

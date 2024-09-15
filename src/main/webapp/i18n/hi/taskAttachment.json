@@ -1,0 +1,25 @@
+{
+  "pilotApp": {
+    "taskAttachment": {
+      "home": {
+        "title": "TaskAttachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Task Attachment बनाएँ",
+        "createOrEditLabel": "Task Attachment बनाएँ या संपादित करें",
+        "notFound": "No Task Attachments found"
+      },
+      "created": "एक नया Task Attachment [identifier: {{ param }}] तैयार है",
+      "updated": "एक Task Attachment [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Task Attachment [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Task Attachment [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Task Attachment"
+      },
+      "id": "ID",
+      "task": "Task",
+      "attachment": "Attachment"
+    }
+  }
+}

@@ -1,0 +1,81 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="sys-task-log-heading" data-cy="TaskLogCreateUpdateHeading" sysTranslate="pilotApp.taskLog.home.createOrEditLabel">
+        Create or edit a Task Log
+      </h2>
+
+      <div>
+        <sys-alert-error></sys-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" sysTranslate="pilotApp.taskLog.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_comments" sysTranslate="pilotApp.taskLog.comments">Comments</label>
+          <input type="text" class="form-control" name="comments" id="field_comments" data-cy="comments" formControlName="comments" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fromTime" sysTranslate="pilotApp.taskLog.fromTime">From Time</label>
+          <div class="d-flex">
+            <input
+              id="field_fromTime"
+              data-cy="fromTime"
+              type="datetime-local"
+              class="form-control"
+              name="fromTime"
+              formControlName="fromTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_toTime" sysTranslate="pilotApp.taskLog.toTime">To Time</label>
+          <div class="d-flex">
+            <input
+              id="field_toTime"
+              data-cy="toTime"
+              type="datetime-local"
+              class="form-control"
+              name="toTime"
+              formControlName="toTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_task" sysTranslate="pilotApp.taskLog.task">Task</label>
+          <select class="form-control" id="field_task" data-cy="task" name="task" formControlName="task" [compareWith]="compareTask">
+            <option [ngValue]="null"></option>
+            @for (taskOption of tasksSharedCollection; track $index) {
+              <option [ngValue]="taskOption">{{ taskOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sysTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sysTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

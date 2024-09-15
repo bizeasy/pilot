@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (individualPerformance(); as individualPerformanceRef) {
+      <div>
+        <h2 data-cy="individualPerformanceDetailsHeading">
+          <span sysTranslate="pilotApp.individualPerformance.detail.title">Individual Performance</span>
+        </h2>
+
+        <hr />
+
+        <sys-alert-error></sys-alert-error>
+
+        <sys-alert></sys-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span sysTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ individualPerformanceRef.id }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.individualPerformance.completedTasks">Completed Tasks</span></dt>
+          <dd>
+            <span>{{ individualPerformanceRef.completedTasks }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.individualPerformance.velocity">Velocity</span></dt>
+          <dd>
+            <span>{{ individualPerformanceRef.velocity }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.individualPerformance.storyPointsCompleted">Story Points Completed</span></dt>
+          <dd>
+            <span>{{ individualPerformanceRef.storyPointsCompleted }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.individualPerformance.party">Party</span></dt>
+          <dd>
+            @if (individualPerformance()!.party) {
+              <div>
+                <a [routerLink]="['/party', individualPerformance()!.party?.id, 'view']">{{ individualPerformanceRef.party?.firstName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.individualPerformance.sprint">Sprint</span></dt>
+          <dd>
+            @if (individualPerformance()!.sprint) {
+              <div>
+                <a [routerLink]="['/sprint', individualPerformance()!.sprint?.id, 'view']">{{ individualPerformanceRef.sprint?.name }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sysTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/individual-performance', individualPerformanceRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sysTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

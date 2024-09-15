@@ -1,0 +1,111 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="sys-team-velocity-heading"
+        data-cy="TeamVelocityCreateUpdateHeading"
+        sysTranslate="pilotApp.teamVelocity.home.createOrEditLabel"
+      >
+        Create or edit a Team Velocity
+      </h2>
+
+      <div>
+        <sys-alert-error></sys-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" sysTranslate="pilotApp.teamVelocity.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let sprintVelocityRef = editForm.get('sprintVelocity')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_sprintVelocity" sysTranslate="pilotApp.teamVelocity.sprintVelocity">Sprint Velocity</label>
+          <input
+            type="number"
+            class="form-control"
+            name="sprintVelocity"
+            id="field_sprintVelocity"
+            data-cy="sprintVelocity"
+            formControlName="sprintVelocity"
+          />
+          @if (sprintVelocityRef.invalid && (sprintVelocityRef.dirty || sprintVelocityRef.touched)) {
+            <div>
+              @if (editForm.get('sprintVelocity')?.errors?.required) {
+                <small class="form-text text-danger" sysTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('sprintVelocity')?.errors?.number"
+                sysTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let averageVelocityRef = editForm.get('averageVelocity')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_averageVelocity" sysTranslate="pilotApp.teamVelocity.averageVelocity"
+            >Average Velocity</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="averageVelocity"
+            id="field_averageVelocity"
+            data-cy="averageVelocity"
+            formControlName="averageVelocity"
+          />
+          @if (averageVelocityRef.invalid && (averageVelocityRef.dirty || averageVelocityRef.touched)) {
+            <div>
+              @if (editForm.get('averageVelocity')?.errors?.required) {
+                <small class="form-text text-danger" sysTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('averageVelocity')?.errors?.number"
+                sysTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sprint" sysTranslate="pilotApp.teamVelocity.sprint">Sprint</label>
+          <select
+            class="form-control"
+            id="field_sprint"
+            data-cy="sprint"
+            name="sprint"
+            formControlName="sprint"
+            [compareWith]="compareSprint"
+          >
+            <option [ngValue]="null"></option>
+            @for (sprintOption of sprintsSharedCollection; track $index) {
+              <option [ngValue]="sprintOption">{{ sprintOption.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sysTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sysTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

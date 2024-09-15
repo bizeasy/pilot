@@ -1,0 +1,25 @@
+{
+  "pilotApp": {
+    "taskAttachment": {
+      "home": {
+        "title": "Task Attachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Task Attachment",
+        "createOrEditLabel": "Create or edit a Task Attachment",
+        "notFound": "No Task Attachments found"
+      },
+      "created": "A new Task Attachment is created with identifier {{ param }}",
+      "updated": "A Task Attachment is updated with identifier {{ param }}",
+      "deleted": "A Task Attachment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Task Attachment {{ id }}?"
+      },
+      "detail": {
+        "title": "Task Attachment"
+      },
+      "id": "ID",
+      "task": "Task",
+      "attachment": "Attachment"
+    }
+  }
+}

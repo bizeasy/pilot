@@ -1,0 +1,25 @@
+{
+  "pilotApp": {
+    "sprintAttachment": {
+      "home": {
+        "title": "SprintAttachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Sprint Attachment बनाएँ",
+        "createOrEditLabel": "Sprint Attachment बनाएँ या संपादित करें",
+        "notFound": "No Sprint Attachments found"
+      },
+      "created": "एक नया Sprint Attachment [identifier: {{ param }}] तैयार है",
+      "updated": "एक Sprint Attachment [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Sprint Attachment [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Sprint Attachment [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Sprint Attachment"
+      },
+      "id": "ID",
+      "sprint": "Sprint",
+      "attachment": "Attachment"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20240915103137"
+  },
+  "applications": ["pilot"],
+  "fields": [
+    {
+      "fieldName": "completedTasks",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "velocity",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "storyPointsCompleted",
+      "fieldType": "Integer"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "IndividualPerformance",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "firstName",
+      "otherEntityName": "party",
+      "relationshipName": "party",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "sprint",
+      "relationshipName": "sprint",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

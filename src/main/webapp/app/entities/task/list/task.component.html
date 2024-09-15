@@ -1,0 +1,243 @@
+<div>
+  <h2 id="page-heading" data-cy="TaskHeading">
+    <span sysTranslate="pilotApp.task.home.title">Tasks</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span sysTranslate="pilotApp.task.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-task"
+        [routerLink]="['/task/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sysTranslate="pilotApp.task.home.createLabel">Create a new Task</span>
+      </button>
+    </div>
+  </h2>
+
+  <sys-alert-error></sys-alert-error>
+
+  <sys-alert></sys-alert>
+
+  <sys-filter [filters]="filters"></sys-filter>
+
+  @if (tasks?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span sysTranslate="pilotApp.task.home.notFound">No Tasks found</span>
+    </div>
+  }
+
+  @if (tasks && tasks.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr sysSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" sysSortBy="id">
+              <div class="d-flex">
+                <span sysTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="title">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.title">Title</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="description">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="priority">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.priority">Priority</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="dueDate">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.dueDate">Due Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="info">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.info">Info</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="storyPoints">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.storyPoints">Story Points</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="startTime">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.startTime">Start Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="pauseTime">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.pauseTime">Pause Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="endTime">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.endTime">End Time</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="totalDuration">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.totalDuration">Total Duration</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="sequenceNo">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.sequenceNo">Sequence No</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="project.name">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.project">Project</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="status.name">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.status">Status</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="assignee.firstName">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.task.assignee">Assignee</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (task of tasks; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/task', task.id, 'view']">{{ task.id }}</a>
+              </td>
+              <td>{{ task.title }}</td>
+              <td>{{ task.description }}</td>
+              <td [sysTranslate]="'pilotApp.TaskPriority.' + (task.priority ?? 'null')">
+                {{ { null: '', LOW: 'LOW', MEDIUM: 'MEDIUM', HIGH: 'HIGH', CRITICAL: 'CRITICAL' }[task.priority ?? 'null'] }}
+              </td>
+              <td>{{ task.dueDate | formatMediumDate }}</td>
+              <td>{{ task.info }}</td>
+              <td>{{ task.storyPoints }}</td>
+              <td>{{ task.startTime | formatMediumDatetime }}</td>
+              <td>{{ task.pauseTime | formatMediumDatetime }}</td>
+              <td>{{ task.endTime | formatMediumDatetime }}</td>
+              <td title="{{ task.totalDuration }}">{{ task.totalDuration | duration }}</td>
+              <td>{{ task.sequenceNo }}</td>
+              <td>
+                @if (task.project) {
+                  <div>
+                    <a [routerLink]="['/project', task.project.id, 'view']">{{ task.project.name }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (task.status) {
+                  <div>
+                    <a [routerLink]="['/status', task.status.id, 'view']">{{ task.status.name }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (task.assignee) {
+                  <div>
+                    <a [routerLink]="['/party', task.assignee.id, 'view']">{{ task.assignee.firstName }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <button
+                    type="submit"
+                    [routerLink]="['/comment']"
+                    [queryParams]="{ 'filter[taskId.in]': task.id }"
+                    class="btn btn-info btn-sm"
+                    data-cy="filterOtherEntityButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span
+                      class="d-none d-md-inline"
+                      sysTranslate="entity.action.show"
+                      [translateValues]="{ otherEntity: ('pilotApp.task.comments' | translate) }"
+                      >Show Comments</span
+                    >
+                  </button>
+                  <a [routerLink]="['/task', task.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/task', task.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(task)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (tasks && tasks.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <sys-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sys-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

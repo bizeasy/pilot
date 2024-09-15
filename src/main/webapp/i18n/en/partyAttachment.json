@@ -1,0 +1,25 @@
+{
+  "pilotApp": {
+    "partyAttachment": {
+      "home": {
+        "title": "Party Attachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Party Attachment",
+        "createOrEditLabel": "Create or edit a Party Attachment",
+        "notFound": "No Party Attachments found"
+      },
+      "created": "A new Party Attachment is created with identifier {{ param }}",
+      "updated": "A Party Attachment is updated with identifier {{ param }}",
+      "deleted": "A Party Attachment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Party Attachment {{ id }}?"
+      },
+      "detail": {
+        "title": "Party Attachment"
+      },
+      "id": "ID",
+      "party": "Party",
+      "attachment": "Attachment"
+    }
+  }
+}

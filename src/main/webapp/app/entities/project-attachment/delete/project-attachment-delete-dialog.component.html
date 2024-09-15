@@ -1,0 +1,30 @@
+@if (projectAttachment) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(projectAttachment.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="projectAttachmentDeleteDialogHeading" sysTranslate="entity.delete.title">
+        Confirm delete operation
+      </h4>
+    </div>
+
+    <div class="modal-body">
+      <sys-alert-error></sys-alert-error>
+      <p
+        id="sys-delete-projectAttachment-heading"
+        sysTranslate="pilotApp.projectAttachment.delete.question"
+        [translateValues]="{ id: projectAttachment.id }"
+      >
+        Are you sure you want to delete Project Attachment {{ projectAttachment.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span sysTranslate="entity.action.cancel">Cancel</span>
+      </button>
+
+      <button id="sys-confirm-delete-projectAttachment" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span sysTranslate="entity.action.delete">Delete</span>
+      </button>
+    </div>
+  </form>
+}

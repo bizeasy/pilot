@@ -1,0 +1,25 @@
+{
+  "pilotApp": {
+    "partyAttachment": {
+      "home": {
+        "title": "Party Attachments",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "కొత్త Party Attachment  సృష్టించండి",
+        "createOrEditLabel": "Party Attachment సృష్టించండి లేదా సవరించండి",
+        "notFound": "No Party Attachments found"
+      },
+      "created": "{{ param }} ఐడీ తో ఒక కొత్త Party Attachment సృష్టించబడినది",
+      "updated": "{{ param }} ఐడీ తో ఒక కొత్త Party Attachment సవరించబడినది",
+      "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Party Attachment తొలగించబడినది",
+      "delete": {
+        "question": "మీరు Party Attachment {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+      },
+      "detail": {
+        "title": "Party Attachment"
+      },
+      "id": "ID",
+      "party": "Party",
+      "attachment": "Attachment"
+    }
+  }
+}

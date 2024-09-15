@@ -1,0 +1,223 @@
+application {
+  config {
+    databaseType sql
+    devDatabaseType postgresql
+    enableHibernateCache true
+    enableSwaggerCodegen false
+    enableTranslation true
+    jhiPrefix sys
+    languages [en, hi, te]
+    nativeLanguage en
+    packageName in.beze.pilot
+    prodDatabaseType postgresql
+    serviceDiscoveryType false
+    skipClient false
+    skipServer false
+    testFrameworks [gatling, cucumber, protractor]
+    websocket spring-websocket
+    applicationType monolith
+    baseName pilot
+    serverPort 8080
+    authenticationType jwt
+    cacheProvider ehcache
+    buildTool gradle
+    clientPackageManager npm
+    clientFramework angularX
+ }
+  entities *
+}
+
+entity Attachment {
+  name String maxlength(25)
+  fileAttachment Blob
+  attachmentUrl String
+  mimeType String
+}
+
+entity Comment {
+  text String required
+}
+
+entity IndividualPerformance {
+  completedTasks Integer
+  velocity Integer
+  storyPointsCompleted Integer
+}
+
+entity Party {
+  firstName String maxlength(100)
+  lastName String maxlength(100)
+  displayName String maxlength(100)
+  email String minlength(5) maxlength(75)
+  dob LocalDate
+  notes String maxlength(255)
+  mobileNumber String required minlength(10) maxlength(14)
+  employeeId String
+  login String
+}
+
+entity PartyAttachment {
+}
+
+entity PartyType {
+  name String maxlength(60)
+  description String maxlength(255)
+}
+
+entity Project {
+  name String required
+  description String
+  startDate LocalDate
+  endDate LocalDate
+}
+
+entity ProjectAttachment {
+}
+
+entity Retrospective {
+  summary String
+  actionItems String
+  dateCreated Instant required
+}
+
+entity Sprint {
+  name String required
+  startDate LocalDate required
+  endDate LocalDate required
+  goal String
+  totalPoints Integer
+}
+
+entity SprintTask {
+  sequenceNo Integer
+  storyPoints Integer
+  fromTime Instant
+  thruTime Instant
+  assignedTime Instant
+  duration Duration
+}
+
+entity SprintTaskHistory {
+  comments String
+  fromDate LocalDate
+  toDate LocalDate
+}
+
+entity Status {
+  name String unique maxlength(60)
+  sequenceNo Integer
+  description String maxlength(100)
+  type String maxlength(60)
+}
+
+entity StatusCategory {
+  name String unique maxlength(60)
+  description String maxlength(100)
+}
+
+entity Task {
+  title String required
+  description String
+  priority TaskPriority
+  dueDate LocalDate
+  info TextBlob
+  storyPoints Integer
+  startTime Instant
+  pauseTime Instant
+  endTime Instant
+  totalDuration Duration
+  sequenceNo Integer
+}
+
+entity TaskAttachment {
+}
+
+entity SprintAttachment {
+}
+
+entity TaskHistory {
+  type String
+}
+
+entity TaskLog {
+  comments String
+  fromTime Instant
+  toTime Instant
+}
+
+entity TeamVelocity {
+  sprintVelocity Integer required
+  averageVelocity Integer required
+}
+
+enum TaskPriority {
+  LOW,
+  MEDIUM,
+  HIGH,
+  CRITICAL
+}
+
+relationship OneToMany {
+  Task {comments} to Comment {task(title) required},
+}
+
+relationship ManyToOne {
+  Task {project(name) required} to Project
+  Task {status(name)} to Status
+  Task {assignee(firstName)} to Party
+  
+  Party {status(name)} to Status
+  Party {partyType(name)} to PartyType
+  
+  ProjectAttachment {facility(name)} to Project
+  ProjectAttachment {attachment} to Attachment
+  
+  PartyAttachment {party(firstName)} to Party
+  PartyAttachment {attachment} to Attachment
+  
+  TaskAttachment {task(title)} to Task
+  TaskAttachment {attachment} to Attachment
+  
+  TeamVelocity {sprint(name)} to Sprint
+  
+  Retrospective {sprint(name)} to Sprint
+  
+  SprintTask {task(title)} to Task
+  SprintTask {sprint(name)} to Sprint
+  SprintTask {assignedTo(firstName)} to Party
+  SprintTask {assignedBy(firstName)} to Party
+  SprintTask {qa(firstName)} to Party
+  SprintTask {reviewedBy(firstName)} to Party
+  SprintTask {status(name)} to Status
+  
+  IndividualPerformance {party(firstName)} to Party
+  IndividualPerformance {sprint(name)} to Sprint
+  
+  SprintTaskHistory {fromStatus(name)} to Status
+  SprintTaskHistory {toStatus(name)} to Status
+  
+  Status{category(name)} to StatusCategory
+  
+  TaskHistory {assignedTo(firstName)} to Party
+  TaskHistory {sprint(name)} to Sprint
+  TaskHistory {assignedBy(firstName)} to Party
+  
+  Sprint {project(name)} to Project
+  Sprint {status(name)} to Status
+  
+  TaskLog {task} to Task
+  
+  SprintAttachment {sprint(name)} to Sprint
+  SprintAttachment {attachment} to Attachment
+}
+
+relationship OneToOne {
+  Party{user(login)} to User with builtInEntity
+}
+
+paginate Attachment, Comment, IndividualPerformance, Party, PartyAttachment, PartyType, Project, ProjectAttachment, Retrospective, Sprint, SprintTask, SprintTaskHistory, Status, StatusCategory, Task, TaskAttachment, TaskHistory, TaskLog, TeamVelocity with pagination
+
+service Attachment, Comment, IndividualPerformance, Party, PartyAttachment, PartyType, Project, ProjectAttachment, Retrospective, Sprint, SprintTask, SprintTaskHistory, Status, StatusCategory, Task, TaskAttachment, TaskHistory, TaskLog, TeamVelocity with serviceClass
+
+filter Comment, IndividualPerformance, Party, PartyAttachment, PartyType, Project, ProjectAttachment, Retrospective, Sprint, SprintTask, SprintTaskHistory, Status, StatusCategory, Task, TaskAttachment, TaskHistory, TaskLog, TeamVelocity
+

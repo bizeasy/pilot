@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20240915104737"
+  },
+  "applications": ["pilot"],
+  "fields": [
+    {
+      "fieldName": "comments",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fromTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "toTime",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "TaskLog",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "task",
+      "relationshipName": "task",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

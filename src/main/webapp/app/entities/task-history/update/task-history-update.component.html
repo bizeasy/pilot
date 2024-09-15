@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="sys-task-history-heading" data-cy="TaskHistoryCreateUpdateHeading" sysTranslate="pilotApp.taskHistory.home.createOrEditLabel">
+        Create or edit a Task History
+      </h2>
+
+      <div>
+        <sys-alert-error></sys-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" sysTranslate="pilotApp.taskHistory.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_type" sysTranslate="pilotApp.taskHistory.type">Type</label>
+          <input type="text" class="form-control" name="type" id="field_type" data-cy="type" formControlName="type" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_assignedTo" sysTranslate="pilotApp.taskHistory.assignedTo">Assigned To</label>
+          <select
+            class="form-control"
+            id="field_assignedTo"
+            data-cy="assignedTo"
+            name="assignedTo"
+            formControlName="assignedTo"
+            [compareWith]="compareParty"
+          >
+            <option [ngValue]="null"></option>
+            @for (partyOption of partiesSharedCollection; track $index) {
+              <option [ngValue]="partyOption">{{ partyOption.firstName }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sprint" sysTranslate="pilotApp.taskHistory.sprint">Sprint</label>
+          <select
+            class="form-control"
+            id="field_sprint"
+            data-cy="sprint"
+            name="sprint"
+            formControlName="sprint"
+            [compareWith]="compareSprint"
+          >
+            <option [ngValue]="null"></option>
+            @for (sprintOption of sprintsSharedCollection; track $index) {
+              <option [ngValue]="sprintOption">{{ sprintOption.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_assignedBy" sysTranslate="pilotApp.taskHistory.assignedBy">Assigned By</label>
+          <select
+            class="form-control"
+            id="field_assignedBy"
+            data-cy="assignedBy"
+            name="assignedBy"
+            formControlName="assignedBy"
+            [compareWith]="compareParty"
+          >
+            <option [ngValue]="null"></option>
+            @for (partyOption of partiesSharedCollection; track $index) {
+              <option [ngValue]="partyOption">{{ partyOption.firstName }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sysTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sysTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

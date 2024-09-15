@@ -1,0 +1,27 @@
+{
+  "pilotApp": {
+    "taskLog": {
+      "home": {
+        "title": "TaskLogs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Task Log बनाएँ",
+        "createOrEditLabel": "Task Log बनाएँ या संपादित करें",
+        "notFound": "No Task Logs found"
+      },
+      "created": "एक नया Task Log [identifier: {{ param }}] तैयार है",
+      "updated": "एक Task Log [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Task Log [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Task Log [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Task Log"
+      },
+      "id": "ID",
+      "comments": "Comments",
+      "fromTime": "From Time",
+      "toTime": "To Time",
+      "task": "Task"
+    }
+  }
+}

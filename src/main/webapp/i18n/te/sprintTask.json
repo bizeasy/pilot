@@ -1,0 +1,36 @@
+{
+  "pilotApp": {
+    "sprintTask": {
+      "home": {
+        "title": "Sprint Tasks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "కొత్త Sprint Task  సృష్టించండి",
+        "createOrEditLabel": "Sprint Task సృష్టించండి లేదా సవరించండి",
+        "notFound": "No Sprint Tasks found"
+      },
+      "created": "{{ param }} ఐడీ తో ఒక కొత్త Sprint Task సృష్టించబడినది",
+      "updated": "{{ param }} ఐడీ తో ఒక కొత్త Sprint Task సవరించబడినది",
+      "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Sprint Task తొలగించబడినది",
+      "delete": {
+        "question": "మీరు Sprint Task {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+      },
+      "detail": {
+        "title": "Sprint Task"
+      },
+      "id": "ID",
+      "sequenceNo": "Sequence No",
+      "storyPoints": "Story Points",
+      "fromTime": "From Time",
+      "thruTime": "Thru Time",
+      "assignedTime": "Assigned Time",
+      "duration": "Duration",
+      "task": "Task",
+      "sprint": "Sprint",
+      "assignedTo": "Assigned To",
+      "assignedBy": "Assigned By",
+      "qa": "Qa",
+      "reviewedBy": "Reviewed By",
+      "status": "Status"
+    }
+  }
+}

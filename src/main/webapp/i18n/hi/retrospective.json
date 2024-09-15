@@ -1,0 +1,27 @@
+{
+  "pilotApp": {
+    "retrospective": {
+      "home": {
+        "title": "Retrospectives",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Retrospective बनाएँ",
+        "createOrEditLabel": "Retrospective बनाएँ या संपादित करें",
+        "notFound": "No Retrospectives found"
+      },
+      "created": "एक नया Retrospective [identifier: {{ param }}] तैयार है",
+      "updated": "एक Retrospective [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Retrospective [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Retrospective [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Retrospective"
+      },
+      "id": "ID",
+      "summary": "Summary",
+      "actionItems": "Action Items",
+      "dateCreated": "Date Created",
+      "sprint": "Sprint"
+    }
+  }
+}

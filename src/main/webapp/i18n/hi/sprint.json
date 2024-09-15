@@ -1,0 +1,30 @@
+{
+  "pilotApp": {
+    "sprint": {
+      "home": {
+        "title": "Sprints",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Sprint बनाएँ",
+        "createOrEditLabel": "Sprint बनाएँ या संपादित करें",
+        "notFound": "No Sprints found"
+      },
+      "created": "एक नया Sprint [identifier: {{ param }}] तैयार है",
+      "updated": "एक Sprint [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Sprint [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Sprint [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Sprint"
+      },
+      "id": "ID",
+      "name": "Name",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "goal": "Goal",
+      "totalPoints": "Total Points",
+      "project": "Project",
+      "status": "Status"
+    }
+  }
+}

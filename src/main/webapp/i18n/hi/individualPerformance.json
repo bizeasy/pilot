@@ -1,0 +1,28 @@
+{
+  "pilotApp": {
+    "individualPerformance": {
+      "home": {
+        "title": "IndividualPerformances",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "नया Individual Performance बनाएँ",
+        "createOrEditLabel": "Individual Performance बनाएँ या संपादित करें",
+        "notFound": "No Individual Performances found"
+      },
+      "created": "एक नया Individual Performance [identifier: {{ param }}] तैयार है",
+      "updated": "एक Individual Performance [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Individual Performance [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Individual Performance [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Individual Performance"
+      },
+      "id": "ID",
+      "completedTasks": "Completed Tasks",
+      "velocity": "Velocity",
+      "storyPointsCompleted": "Story Points Completed",
+      "party": "Party",
+      "sprint": "Sprint"
+    }
+  }
+}

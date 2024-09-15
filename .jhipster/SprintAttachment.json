@@ -1,0 +1,24 @@
+{
+  "annotations": {
+    "changelogDate": "20240915104537"
+  },
+  "applications": ["pilot"],
+  "fields": [],
+  "name": "SprintAttachment",
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "sprint",
+      "relationshipName": "sprint",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "attachment",
+      "relationshipName": "attachment",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

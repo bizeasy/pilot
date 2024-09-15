@@ -1,0 +1,157 @@
+<div>
+  <h2 id="page-heading" data-cy="SprintTaskHistoryHeading">
+    <span sysTranslate="pilotApp.sprintTaskHistory.home.title">Sprint Task Histories</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span sysTranslate="pilotApp.sprintTaskHistory.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sprint-task-history"
+        [routerLink]="['/sprint-task-history/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span sysTranslate="pilotApp.sprintTaskHistory.home.createLabel">Create a new Sprint Task History</span>
+      </button>
+    </div>
+  </h2>
+
+  <sys-alert-error></sys-alert-error>
+
+  <sys-alert></sys-alert>
+
+  <sys-filter [filters]="filters"></sys-filter>
+
+  @if (sprintTaskHistories?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span sysTranslate="pilotApp.sprintTaskHistory.home.notFound">No Sprint Task Histories found</span>
+    </div>
+  }
+
+  @if (sprintTaskHistories && sprintTaskHistories.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr sysSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" sysSortBy="id">
+              <div class="d-flex">
+                <span sysTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="comments">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.sprintTaskHistory.comments">Comments</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="fromDate">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.sprintTaskHistory.fromDate">From Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="toDate">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.sprintTaskHistory.toDate">To Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="fromStatus.name">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.sprintTaskHistory.fromStatus">From Status</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" sysSortBy="toStatus.name">
+              <div class="d-flex">
+                <span sysTranslate="pilotApp.sprintTaskHistory.toStatus">To Status</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (sprintTaskHistory of sprintTaskHistories; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/sprint-task-history', sprintTaskHistory.id, 'view']">{{ sprintTaskHistory.id }}</a>
+              </td>
+              <td>{{ sprintTaskHistory.comments }}</td>
+              <td>{{ sprintTaskHistory.fromDate | formatMediumDate }}</td>
+              <td>{{ sprintTaskHistory.toDate | formatMediumDate }}</td>
+              <td>
+                @if (sprintTaskHistory.fromStatus) {
+                  <div>
+                    <a [routerLink]="['/status', sprintTaskHistory.fromStatus.id, 'view']">{{ sprintTaskHistory.fromStatus.name }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (sprintTaskHistory.toStatus) {
+                  <div>
+                    <a [routerLink]="['/status', sprintTaskHistory.toStatus.id, 'view']">{{ sprintTaskHistory.toStatus.name }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/sprint-task-history', sprintTaskHistory.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/sprint-task-history', sprintTaskHistory.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(sprintTaskHistory)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" sysTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (sprintTaskHistories && sprintTaskHistories.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <sys-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></sys-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

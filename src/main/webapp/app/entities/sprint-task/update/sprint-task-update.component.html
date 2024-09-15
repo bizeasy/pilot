@@ -1,0 +1,215 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="sys-sprint-task-heading" data-cy="SprintTaskCreateUpdateHeading" sysTranslate="pilotApp.sprintTask.home.createOrEditLabel">
+        Create or edit a Sprint Task
+      </h2>
+
+      <div>
+        <sys-alert-error></sys-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" sysTranslate="pilotApp.sprintTask.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sequenceNo" sysTranslate="pilotApp.sprintTask.sequenceNo">Sequence No</label>
+          <input
+            type="number"
+            class="form-control"
+            name="sequenceNo"
+            id="field_sequenceNo"
+            data-cy="sequenceNo"
+            formControlName="sequenceNo"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_storyPoints" sysTranslate="pilotApp.sprintTask.storyPoints">Story Points</label>
+          <input
+            type="number"
+            class="form-control"
+            name="storyPoints"
+            id="field_storyPoints"
+            data-cy="storyPoints"
+            formControlName="storyPoints"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fromTime" sysTranslate="pilotApp.sprintTask.fromTime">From Time</label>
+          <div class="d-flex">
+            <input
+              id="field_fromTime"
+              data-cy="fromTime"
+              type="datetime-local"
+              class="form-control"
+              name="fromTime"
+              formControlName="fromTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_thruTime" sysTranslate="pilotApp.sprintTask.thruTime">Thru Time</label>
+          <div class="d-flex">
+            <input
+              id="field_thruTime"
+              data-cy="thruTime"
+              type="datetime-local"
+              class="form-control"
+              name="thruTime"
+              formControlName="thruTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_assignedTime" sysTranslate="pilotApp.sprintTask.assignedTime">Assigned Time</label>
+          <div class="d-flex">
+            <input
+              id="field_assignedTime"
+              data-cy="assignedTime"
+              type="datetime-local"
+              class="form-control"
+              name="assignedTime"
+              formControlName="assignedTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_duration" sysTranslate="pilotApp.sprintTask.duration">Duration</label>
+          <input type="text" class="form-control" name="duration" id="field_duration" data-cy="duration" formControlName="duration" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_task" sysTranslate="pilotApp.sprintTask.task">Task</label>
+          <select class="form-control" id="field_task" data-cy="task" name="task" formControlName="task" [compareWith]="compareTask">
+            <option [ngValue]="null"></option>
+            @for (taskOption of tasksSharedCollection; track $index) {
+              <option [ngValue]="taskOption">{{ taskOption.title }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sprint" sysTranslate="pilotApp.sprintTask.sprint">Sprint</label>
+          <select
+            class="form-control"
+            id="field_sprint"
+            data-cy="sprint"
+            name="sprint"
+            formControlName="sprint"
+            [compareWith]="compareSprint"
+          >
+            <option [ngValue]="null"></option>
+            @for (sprintOption of sprintsSharedCollection; track $index) {
+              <option [ngValue]="sprintOption">{{ sprintOption.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_assignedTo" sysTranslate="pilotApp.sprintTask.assignedTo">Assigned To</label>
+          <select
+            class="form-control"
+            id="field_assignedTo"
+            data-cy="assignedTo"
+            name="assignedTo"
+            formControlName="assignedTo"
+            [compareWith]="compareParty"
+          >
+            <option [ngValue]="null"></option>
+            @for (partyOption of partiesSharedCollection; track $index) {
+              <option [ngValue]="partyOption">{{ partyOption.firstName }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_assignedBy" sysTranslate="pilotApp.sprintTask.assignedBy">Assigned By</label>
+          <select
+            class="form-control"
+            id="field_assignedBy"
+            data-cy="assignedBy"
+            name="assignedBy"
+            formControlName="assignedBy"
+            [compareWith]="compareParty"
+          >
+            <option [ngValue]="null"></option>
+            @for (partyOption of partiesSharedCollection; track $index) {
+              <option [ngValue]="partyOption">{{ partyOption.firstName }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_qa" sysTranslate="pilotApp.sprintTask.qa">Qa</label>
+          <select class="form-control" id="field_qa" data-cy="qa" name="qa" formControlName="qa" [compareWith]="compareParty">
+            <option [ngValue]="null"></option>
+            @for (partyOption of partiesSharedCollection; track $index) {
+              <option [ngValue]="partyOption">{{ partyOption.firstName }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_reviewedBy" sysTranslate="pilotApp.sprintTask.reviewedBy">Reviewed By</label>
+          <select
+            class="form-control"
+            id="field_reviewedBy"
+            data-cy="reviewedBy"
+            name="reviewedBy"
+            formControlName="reviewedBy"
+            [compareWith]="compareParty"
+          >
+            <option [ngValue]="null"></option>
+            @for (partyOption of partiesSharedCollection; track $index) {
+              <option [ngValue]="partyOption">{{ partyOption.firstName }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" sysTranslate="pilotApp.sprintTask.status">Status</label>
+          <select
+            class="form-control"
+            id="field_status"
+            data-cy="status"
+            name="status"
+            formControlName="status"
+            [compareWith]="compareStatus"
+          >
+            <option [ngValue]="null"></option>
+            @for (statusOption of statusesSharedCollection; track $index) {
+              <option [ngValue]="statusOption">{{ statusOption.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span sysTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span sysTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

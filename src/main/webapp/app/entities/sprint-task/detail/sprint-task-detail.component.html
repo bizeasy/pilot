@@ -1,0 +1,110 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (sprintTask(); as sprintTaskRef) {
+      <div>
+        <h2 data-cy="sprintTaskDetailsHeading"><span sysTranslate="pilotApp.sprintTask.detail.title">Sprint Task</span></h2>
+
+        <hr />
+
+        <sys-alert-error></sys-alert-error>
+
+        <sys-alert></sys-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span sysTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ sprintTaskRef.id }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.sequenceNo">Sequence No</span></dt>
+          <dd>
+            <span>{{ sprintTaskRef.sequenceNo }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.storyPoints">Story Points</span></dt>
+          <dd>
+            <span>{{ sprintTaskRef.storyPoints }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.fromTime">From Time</span></dt>
+          <dd>
+            <span>{{ sprintTaskRef.fromTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.thruTime">Thru Time</span></dt>
+          <dd>
+            <span>{{ sprintTaskRef.thruTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.assignedTime">Assigned Time</span></dt>
+          <dd>
+            <span>{{ sprintTaskRef.assignedTime | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.duration">Duration</span></dt>
+          <dd>
+            <span>{{ sprintTaskRef.duration | duration }} ({{ sprintTaskRef.duration }})</span>
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.task">Task</span></dt>
+          <dd>
+            @if (sprintTask()!.task) {
+              <div>
+                <a [routerLink]="['/task', sprintTask()!.task?.id, 'view']">{{ sprintTaskRef.task?.title }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.sprint">Sprint</span></dt>
+          <dd>
+            @if (sprintTask()!.sprint) {
+              <div>
+                <a [routerLink]="['/sprint', sprintTask()!.sprint?.id, 'view']">{{ sprintTaskRef.sprint?.name }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.assignedTo">Assigned To</span></dt>
+          <dd>
+            @if (sprintTask()!.assignedTo) {
+              <div>
+                <a [routerLink]="['/party', sprintTask()!.assignedTo?.id, 'view']">{{ sprintTaskRef.assignedTo?.firstName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.assignedBy">Assigned By</span></dt>
+          <dd>
+            @if (sprintTask()!.assignedBy) {
+              <div>
+                <a [routerLink]="['/party', sprintTask()!.assignedBy?.id, 'view']">{{ sprintTaskRef.assignedBy?.firstName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.qa">Qa</span></dt>
+          <dd>
+            @if (sprintTask()!.qa) {
+              <div>
+                <a [routerLink]="['/party', sprintTask()!.qa?.id, 'view']">{{ sprintTaskRef.qa?.firstName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.reviewedBy">Reviewed By</span></dt>
+          <dd>
+            @if (sprintTask()!.reviewedBy) {
+              <div>
+                <a [routerLink]="['/party', sprintTask()!.reviewedBy?.id, 'view']">{{ sprintTaskRef.reviewedBy?.firstName }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span sysTranslate="pilotApp.sprintTask.status">Status</span></dt>
+          <dd>
+            @if (sprintTask()!.status) {
+              <div>
+                <a [routerLink]="['/status', sprintTask()!.status?.id, 'view']">{{ sprintTaskRef.status?.name }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span sysTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/sprint-task', sprintTaskRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span sysTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

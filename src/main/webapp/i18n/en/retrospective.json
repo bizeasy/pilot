@@ -1,0 +1,27 @@
+{
+  "pilotApp": {
+    "retrospective": {
+      "home": {
+        "title": "Retrospectives",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Retrospective",
+        "createOrEditLabel": "Create or edit a Retrospective",
+        "notFound": "No Retrospectives found"
+      },
+      "created": "A new Retrospective is created with identifier {{ param }}",
+      "updated": "A Retrospective is updated with identifier {{ param }}",
+      "deleted": "A Retrospective is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Retrospective {{ id }}?"
+      },
+      "detail": {
+        "title": "Retrospective"
+      },
+      "id": "ID",
+      "summary": "Summary",
+      "actionItems": "Action Items",
+      "dateCreated": "Date Created",
+      "sprint": "Sprint"
+    }
+  }
+}

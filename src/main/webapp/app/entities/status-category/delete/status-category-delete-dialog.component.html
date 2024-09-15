@@ -1,0 +1,28 @@
+@if (statusCategory) {
+  <form name="deleteForm" (ngSubmit)="confirmDelete(statusCategory.id!)">
+    <div class="modal-header">
+      <h4 class="modal-title" data-cy="statusCategoryDeleteDialogHeading" sysTranslate="entity.delete.title">Confirm delete operation</h4>
+    </div>
+
+    <div class="modal-body">
+      <sys-alert-error></sys-alert-error>
+      <p
+        id="sys-delete-statusCategory-heading"
+        sysTranslate="pilotApp.statusCategory.delete.question"
+        [translateValues]="{ id: statusCategory.id }"
+      >
+        Are you sure you want to delete Status Category {{ statusCategory.id }}?
+      </p>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+        <fa-icon icon="ban"></fa-icon>&nbsp;<span sysTranslate="entity.action.cancel">Cancel</span>
+      </button>
+
+      <button id="sys-confirm-delete-statusCategory" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+        <fa-icon icon="times"></fa-icon>&nbsp;<span sysTranslate="entity.action.delete">Delete</span>
+      </button>
+    </div>
+  </form>
+}

@@ -1,0 +1,28 @@
+{
+  "pilotApp": {
+    "individualPerformance": {
+      "home": {
+        "title": "Individual Performances",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "కొత్త Individual Performance  సృష్టించండి",
+        "createOrEditLabel": "Individual Performance సృష్టించండి లేదా సవరించండి",
+        "notFound": "No Individual Performances found"
+      },
+      "created": "{{ param }} ఐడీ తో ఒక కొత్త Individual Performance సృష్టించబడినది",
+      "updated": "{{ param }} ఐడీ తో ఒక కొత్త Individual Performance సవరించబడినది",
+      "deleted": "{{ param }} ఐడీ తో ఒక కొత్త Individual Performance తొలగించబడినది",
+      "delete": {
+        "question": "మీరు Individual Performance {{ id }} ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?"
+      },
+      "detail": {
+        "title": "Individual Performance"
+      },
+      "id": "ID",
+      "completedTasks": "Completed Tasks",
+      "velocity": "Velocity",
+      "storyPointsCompleted": "Story Points Completed",
+      "party": "Party",
+      "sprint": "Sprint"
+    }
+  }
+}
