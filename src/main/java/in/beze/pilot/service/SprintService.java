@@ -1,7 +1,11 @@
 package in.beze.pilot.service;
 
+import com.google.zxing.WriterException;
+import in.beze.pilot.domain.Attachment;
 import in.beze.pilot.domain.Sprint;
+import in.beze.pilot.repository.AttachmentRepository;
 import in.beze.pilot.repository.SprintRepository;
+import java.io.IOException;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +25,14 @@ public class SprintService {
 
     private final SprintRepository sprintRepository;
 
-    public SprintService(SprintRepository sprintRepository) {
+    private final QrCodeGenerator qrCodeGenerator;
+
+    private final AttachmentRepository attachmentRepository;
+
+    public SprintService(SprintRepository sprintRepository, QrCodeGenerator qrCodeGenerator, AttachmentRepository attachmentRepository) {
         this.sprintRepository = sprintRepository;
+        this.qrCodeGenerator = qrCodeGenerator;
+        this.attachmentRepository = attachmentRepository;
     }
 
     /**
@@ -33,7 +43,41 @@ public class SprintService {
      */
     public Sprint save(Sprint sprint) {
         LOG.debug("Request to save Sprint : {}", sprint);
-        return sprintRepository.save(sprint);
+        sprint = sprintRepository.save(sprint);
+        Attachment attachment = new Attachment();
+
+        // Generate QR Code Image
+        byte[] qrCode = new byte[0];
+        try {
+            qrCode = qrCodeGenerator.generateQRCode(sprint.getId().toString(), 200, 200);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (WriterException e1) {
+            throw new RuntimeException(e1);
+        }
+        LOG.debug("qrCode=================================================" + qrCode);
+        Attachment at = new Attachment();
+        at.setFileAttachment(qrCode);
+        at.setFileAttachmentContentType("image/png");
+        attachmentRepository.save(at);
+
+        // Generate Bar Code
+
+        byte[] barCode = new byte[0];
+        try {
+            barCode = qrCodeGenerator.generateBarCode(sprint.getId().toString(), 100, 200);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (WriterException e1) {
+            throw new RuntimeException(e1);
+        }
+        LOG.debug("barCode=================================================" + barCode);
+        Attachment at1 = new Attachment();
+        at1.setFileAttachment(barCode);
+        at1.setFileAttachmentContentType("image/png");
+        attachmentRepository.save(at1);
+
+        return sprint;
     }
 
     /**

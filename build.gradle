@@ -168,6 +168,8 @@ dependencies {
     testImplementation "org.testcontainers:testcontainers"
     annotationProcessor "org.glassfish.jaxb:jaxb-runtime"
     annotationProcessor "org.hibernate.orm:hibernate-jpamodelgen"
+    implementation group: 'com.google.zxing', name: 'core', version: '3.5.3'
+    implementation group: 'com.google.zxing', name: 'javase', version: '3.5.3'
     // jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 
